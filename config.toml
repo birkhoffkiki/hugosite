@@ -6,10 +6,13 @@ languageCode = "zh-CN"
 # 是否包括中日韩文字
 hasCJKLanguage = true
 # 网站标题
-title = "LoveIt"
+title = "majiabo"
 
 # 更改使用 Hugo 构建网站时使用的默认主题
 theme = "LoveIt"
+
+#允许emoji
+enableEmoji = true
 
 [params]
   # LoveIt 主题版本
@@ -19,7 +22,7 @@ theme = "LoveIt"
   gitRepo="https://birkhoffkiki/github.com/hugosite"
   dateFormat = "2021-12-08"
   # 网站图片, 用于 Open Graph 和 Twitter Cards
-  # images = ["/logo.png"]
+  # images = ["/images/head.png"]
 
  [params.search]
     enable = true
@@ -109,9 +112,9 @@ theme = "LoveIt"
       # Gravatar 邮箱，用于优先在主页显示的头像
       gravatarEmail = ""
       # 主页显示头像的 URL
-      avatarURL = "/images/fixed/head.jpg"
+      avatarURL = "images/head.jpg"
       # LoveIt 更改 | 0.2.7 主页显示的网站标题 (支持 HTML 格式)
-      title = "LoveIt"
+      title = "好记性不如烂笔头"
       # 主页显示的网站副标题
       subtitle = "这是我的全新 Hugo 网站"
       # 是否为副标题显示打字机动画
@@ -192,7 +195,7 @@ theme = "LoveIt"
     Gitea = ""
     XMPP = ""
     Matrix = ""
-    Bilibili = "啃馒头吃咸菜"
+    Bilibili = "281795884"
     Email = "birkhoffkiki@gmail.com"
     RSS = true # LoveIt 新增 | 0.2.0
 
@@ -473,9 +476,9 @@ theme = "LoveIt"
 
 # 作者配置
 [author]
-  name = "xxxx"
-  email = ""
-  link = ""
+  name = "majiabo"
+  email = "birkhoffkiki@gmail.com"
+  link = "https://majiabo.top"
 
 # 网站地图配置
 [sitemap]
@@ -527,7 +530,7 @@ theme = "LoveIt"
     # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
     post = ""
     name = "文章"
-    url = "/content/posts/"
+    url = "posts/"
     # 当你将鼠标悬停在此菜单链接上时, 将显示的标题
     title = ""
     weight = 1
@@ -536,7 +539,7 @@ theme = "LoveIt"
     pre = ""
     post = ""
     name = "标签"
-    url = "/tags/"
+    url = "tags/"
     title = ""
     weight = 2
   [[menu.main]]
@@ -544,7 +547,23 @@ theme = "LoveIt"
     pre = ""
     post = ""
     name = "分类"
-    url = "/categories/"
+    url = "categories/"
     title = ""
     weight = 3
+  [[menu.main]]
+    identifier = "about"
+    pre = ""
+    post = ""
+    name = "关于"
+    url = "https://majiabo.top"
+    title = ""
+    weight = 4
+  [[menu.main]]
+    identifier = "help"
+    pre = "&#128512"
+    post = ""
+    name = "使用指南"
+    url = "https://hugoloveit.com/zh-cn/"
+    title = ""
+    weight = 5
 
