@@ -4,19 +4,19 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title>__init__.py 探索 - majiabo</title><meta name=Description content="LoveIt"><meta property="og:title" content="__init__.py 探索">
-<meta property="og:description" content="The first post 😄 hhhhhh">
+<title>Bilinear_interpolation 原理及实现 - majiabo</title><meta name=Description content="LoveIt"><meta property="og:title" content="Bilinear_interpolation 原理及实现">
+<meta property="og:description" content="图像插值 😄 本文参考此博客 pytorch interpolation torch.nn.functional.interpolate 可能将正像素插值为负像素（待查明）">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://birkhoffkiki.github.io/hugosite/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-12-08T00:00:00+00:00">
-<meta property="article:modified_time" content="2021-12-08T00:00:00+00:00">
+<meta property="og:url" content="https://birkhoffkiki.github.io/hugosite/bilinear_interpolation/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-12-09T16:28:12+08:00">
+<meta property="article:modified_time" content="2021-12-09T16:28:12+08:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content="__init__.py 探索">
-<meta name=twitter:description content="The first post 😄 hhhhhh">
+<meta name=twitter:title content="Bilinear_interpolation 原理及实现">
+<meta name=twitter:description content="图像插值 😄 本文参考此博客 pytorch interpolation torch.nn.functional.interpolate 可能将正像素插值为负像素（待查明）">
 <meta name=application-name content="majiabo">
 <meta name=apple-mobile-web-app-title content="majiabo"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://birkhoffkiki.github.io/hugosite/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8/><link rel=prev href=https://birkhoffkiki.github.io/hugosite/pytorch-ddp%E6%8E%A2%E7%B4%A2/><link rel=next href=https://birkhoffkiki.github.io/hugosite/bilinear_interpolation/><link rel=stylesheet href=/hugosite/lib/normalize/normalize.min.css><link rel=stylesheet href=/hugosite/css/style.min.css><link rel=stylesheet href=/hugosite/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/hugosite/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"__init__.py 探索","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/birkhoffkiki.github.io\/hugosite\/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8\/"},"genre":"posts","keywords":"python, module","wordcount":5,"url":"https:\/\/birkhoffkiki.github.io\/hugosite\/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8\/","datePublished":"2021-12-08T00:00:00+00:00","dateModified":"2021-12-08T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"majiabo"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://birkhoffkiki.github.io/hugosite/bilinear_interpolation/><link rel=prev href=https://birkhoffkiki.github.io/hugosite/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8/><link rel=next href=https://birkhoffkiki.github.io/hugosite/dataparallel-the-dimension-of-output-is-different-from-input/><link rel=stylesheet href=/hugosite/lib/normalize/normalize.min.css><link rel=stylesheet href=/hugosite/css/style.min.css><link rel=stylesheet href=/hugosite/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/hugosite/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Bilinear_interpolation 原理及实现","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/birkhoffkiki.github.io\/hugosite\/bilinear_interpolation\/"},"genre":"posts","keywords":"image processing, CV","wordcount":32,"url":"https:\/\/birkhoffkiki.github.io\/hugosite\/bilinear_interpolation\/","datePublished":"2021-12-09T16:28:12+08:00","dateModified":"2021-12-09T16:28:12+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"majiabo"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -82,9 +82,9 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX">__init__.py 探索</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=https://majiabo.top title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>majiabo</a></span>&nbsp;<span class=post-category>收录于 <a href=/hugosite/categories/python/><i class="far fa-folder fa-fw"></i>python</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=80812-128-08>80812-128-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5 字&nbsp;
+</div><article class="page single"><h1 class="single-title animated flipInX">Bilinear_interpolation 原理及实现</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=https://majiabo.top title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>majiabo</a></span>&nbsp;<span class=post-category>收录于 <a href=/hugosite/categories/image-processing/><i class="far fa-folder fa-fw"></i>image processing</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=90912-129-08>90912-129-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 32 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept=true>
 <div class="details-summary toc-title">
@@ -92,33 +92,35 @@
 <span><i class="details-icon fas fa-angle-right"></i></span>
 </div>
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents></nav></div>
-</div><div class=content id=content><h1 id=the-first-post>The first post</h1>
-<p>😄 hhhhhh</p>
+</div><div class=content id=content><h1 id=图像插值>图像插值</h1>
+<p>😄 本文参考<a href=https://theailearner.com/2018/12/29/image-processing-bilinear-interpolation/ target=_blank rel="noopener noreffer">此博客</a></p>
+<h1 id=pytorch-interpolation>pytorch interpolation</h1>
+<p>torch.nn.functional.interpolate 可能将正像素插值为负像素（待查明）</p>
 </div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 80812-128-08</span>
+<span>更新于 90912-129-08</span>
 </div>
 <div class=post-info-license></div>
 </div>
 <div class=post-info-line>
 <div class=post-info-md><span>
-<a class=link-to-markdown href=/hugosite/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8/index.md target=_blank>阅读原始文档</a>
+<a class=link-to-markdown href=/hugosite/bilinear_interpolation/index.md target=_blank>阅读原始文档</a>
 </span></div>
 <div class=post-info-share>
-<span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://birkhoffkiki.github.io/hugosite/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8/ data-title="__init__.py 探索" data-hashtags=python,module><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://birkhoffkiki.github.io/hugosite/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8/ data-hashtag=python><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://birkhoffkiki.github.io/hugosite/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8/ data-title="__init__.py 探索" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://birkhoffkiki.github.io/hugosite/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8/ data-title="__init__.py 探索"><i data-svg-src=/hugosite/lib/simple-icons/icons/line.min.svg></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://birkhoffkiki.github.io/hugosite/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8/ data-title="__init__.py 探索"><i class="fab fa-weibo fa-fw"></i></a><a href=javascript:void(0); title="分享到 Myspace" data-sharer=myspace data-url=https://birkhoffkiki.github.io/hugosite/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8/ data-title="__init__.py 探索" data-description><i data-svg-src=/hugosite/lib/simple-icons/icons/myspace.min.svg></i></a><a href=javascript:void(0); title="分享到 Blogger" data-sharer=blogger data-url=https://birkhoffkiki.github.io/hugosite/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8/ data-title="__init__.py 探索" data-description><i class="fab fa-blogger fa-fw"></i></a><a href=javascript:void(0); title="分享到 Evernote" data-sharer=evernote data-url=https://birkhoffkiki.github.io/hugosite/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8/ data-title="__init__.py 探索"><i class="fab fa-evernote fa-fw"></i></a></span>
+<span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://birkhoffkiki.github.io/hugosite/bilinear_interpolation/ data-title="Bilinear_interpolation 原理及实现" data-hashtags="image processing,CV"><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://birkhoffkiki.github.io/hugosite/bilinear_interpolation/ data-hashtag="image processing"><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://birkhoffkiki.github.io/hugosite/bilinear_interpolation/ data-title="Bilinear_interpolation 原理及实现" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://birkhoffkiki.github.io/hugosite/bilinear_interpolation/ data-title="Bilinear_interpolation 原理及实现"><i data-svg-src=/hugosite/lib/simple-icons/icons/line.min.svg></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://birkhoffkiki.github.io/hugosite/bilinear_interpolation/ data-title="Bilinear_interpolation 原理及实现"><i class="fab fa-weibo fa-fw"></i></a><a href=javascript:void(0); title="分享到 Myspace" data-sharer=myspace data-url=https://birkhoffkiki.github.io/hugosite/bilinear_interpolation/ data-title="Bilinear_interpolation 原理及实现" data-description><i data-svg-src=/hugosite/lib/simple-icons/icons/myspace.min.svg></i></a><a href=javascript:void(0); title="分享到 Blogger" data-sharer=blogger data-url=https://birkhoffkiki.github.io/hugosite/bilinear_interpolation/ data-title="Bilinear_interpolation 原理及实现" data-description><i class="fab fa-blogger fa-fw"></i></a><a href=javascript:void(0); title="分享到 Evernote" data-sharer=evernote data-url=https://birkhoffkiki.github.io/hugosite/bilinear_interpolation/ data-title="Bilinear_interpolation 原理及实现"><i class="fab fa-evernote fa-fw"></i></a></span>
 </div>
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/hugosite/tags/python/>python</a>,&nbsp;<a href=/hugosite/tags/module/>module</a></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/hugosite/tags/image-processing/>image processing</a>,&nbsp;<a href=/hugosite/tags/cv/>CV</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/hugosite/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/hugosite/pytorch-ddp%E6%8E%A2%E7%B4%A2/ class=prev rel=prev title="pytorch DDP 探索"><i class="fas fa-angle-left fa-fw"></i>pytorch DDP 探索</a>
-<a href=/hugosite/bilinear_interpolation/ class=next rel=next title="Bilinear_interpolation 原理及实现">Bilinear_interpolation 原理及实现<i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/hugosite/python%E4%B8%AD-__init__.py-%E7%9A%84%E4%BD%BF%E7%94%A8/ class=prev rel=prev title="__init__.py 探索"><i class="fas fa-angle-left fa-fw"></i>__init__.py 探索</a>
+<a href=/hugosite/dataparallel-the-dimension-of-output-is-different-from-input/ class=next rel=next title="DataParallel  the Dimension of Output Is Different From Input">DataParallel the Dimension of Output Is Different From Input<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id=comments></div></article></div>
 </main><footer class=footer>
