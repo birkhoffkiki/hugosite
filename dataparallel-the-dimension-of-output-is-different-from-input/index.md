@@ -8,7 +8,7 @@
 
 当使用nn.DataParallel包裹模型后，模型输入的Batch维度和输出的batch维度不一致，此问题尤其会出现在多个输入的情况下，且其中某个输入为了节省资源被共用的情况下。 
 举例说明情况：  
-假设model正常接受两个输入$x_1 \in [N, C, H, W]$, $x_2\in [1, M, N]$, 且模型输出为$y_1 \in [N, C, H*2, W*2]$。 若model被nn.DataParallel包裹后且使用2个GPU时，假设$x_1, x_2$不变，此时输出将变为$y_{new}\in [N/2, C, H, W]$。  
+假设model正常接受两个输入$x_1 \in [N, C, H, W]$, $x_2\in [1, M, N]$, 且模型输出为$y_1 \in [N, C, H, W]$。 若model被nn.DataParallel包裹后且使用2个GPU时，假设$x_1, x_2$不变，此时输出将变为$y\in [N/2, C, H, W]$。  
 ```python
 # 代码演示
 from torch import nn
