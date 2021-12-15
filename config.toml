@@ -304,11 +304,13 @@ enableEmoji = true
       # Gitalk 评论系统设置
       [params.page.comment.gitalk]
         # LoveIt 新增 | 0.1.1
-        enable = false
-        owner = ""
-        repo = ""
-        clientId = ""
-        clientSecret = ""
+        enable = true
+        owner = "birkhoffkiki"
+        repo = "hugosite"
+        clientId = "d6b047b05a271ae1181f"
+        clientSecret = "8c774ac612503288bc0e50802e52a87e95d5a06c"
+        admin="birkhoffkiki"
+        labels="gitalk"
       # Valine 评论系统设置
       [params.page.comment.valine]
         enable = false

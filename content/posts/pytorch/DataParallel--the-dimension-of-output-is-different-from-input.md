@@ -4,6 +4,15 @@ date: 2021-12-15T16:24:02+08:00
 draft: False
 tags: [pytorch, CV]
 categories: [pytorch]
+comment:
+    gitalk:
+        id: "comments"
+        enable: true
+        owner: "birkhoffkiki"
+        repo: "hugosite"
+        clientId: "d6b047b05a271ae1181f"
+        clientSecret: "8c774ac612503288bc0e50802e52a87e95d5a06c"
+        admin: "birkhoffkiki"
 ---
 
 
