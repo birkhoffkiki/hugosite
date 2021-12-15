@@ -308,9 +308,9 @@ enableEmoji = true
         owner = "birkhoffkiki"
         repo = "hugosite"
         clientId = "d6b047b05a271ae1181f"
-        clientSecret = "8c774ac612503288bc0e50802e52a87e95d5a06c"
+        clientSecret = "19952e51bace9572ae50c15953f9fb5a563ba6b2"
         admin="birkhoffkiki"
-        labels="gitalk"
+        createIssueManually=true
       # Valine 评论系统设置
       [params.page.comment.valine]
         enable = false
@@ -424,7 +424,7 @@ enableEmoji = true
 
   # LoveIt 新增 | 0.2.7 Cookie 许可配置
   [params.cookieconsent]
-    enable = true
+    enable = false
     # 用于 Cookie 许可横幅的文本字符串
     [params.cookieconsent.content]
       message = ""
