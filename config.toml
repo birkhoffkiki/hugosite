@@ -311,6 +311,8 @@ enableEmoji = true
         clientSecret = "19952e51bace9572ae50c15953f9fb5a563ba6b2"
         admin="birkhoffkiki"
         createIssueManually=true
+        proxy="https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token"
+
       # Valine 评论系统设置
       [params.page.comment.valine]
         enable = false
