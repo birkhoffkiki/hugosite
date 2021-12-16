@@ -310,8 +310,8 @@ enableEmoji = true
         clientId = "d6b047b05a271ae1181f"
         clientSecret = "19952e51bace9572ae50c15953f9fb5a563ba6b2"
         admin="birkhoffkiki"
-        createIssueManually=true
-        proxy="https://solitary-credit-6e2c.birkhoffkiki.workers.dev/?https://github.com/login/oauth/access_token"
+        createIssueManually=false
+        # proxy="solitary-credit-6e2c.birkhoffkiki.workers.dev/https://github.com/login/oauth/access_token"
 
       # Valine 评论系统设置
       [params.page.comment.valine]
