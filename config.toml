@@ -20,7 +20,7 @@ enableEmoji = true
   description="LoveIt"
   keywords = ["blog", "majiabo"]
   gitRepo="https://birkhoffkiki/github.com/hugosite"
-  dateFormat = "2021-12-08"
+  dateFormat = "2006.1.02"
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   # images = ["/images/head.png"]
 
